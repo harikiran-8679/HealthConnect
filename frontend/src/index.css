@@ -1,0 +1,103 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  body {
+    @apply bg-white text-gray-900 antialiased;
+    font-family: 'Inter', 'Noto Sans Devanagari', 'Noto Sans Tamil', system-ui, sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Plus Jakarta Sans', 'Noto Sans Devanagari', 'Noto Sans Tamil', system-ui, sans-serif;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply inline-flex items-center justify-center px-6 py-3 bg-primary-600 text-white font-semibold rounded-xl
+           hover:bg-primary-700 active:bg-primary-800 transition-all duration-200
+           disabled:opacity-50 disabled:cursor-not-allowed
+           text-base min-h-[48px] min-w-[48px];
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center px-6 py-3 bg-white text-primary-700 font-semibold rounded-xl border-2 border-primary-200
+           hover:bg-primary-50 hover:border-primary-300 active:bg-primary-100 transition-all duration-200
+           text-base min-h-[48px] min-w-[48px];
+  }
+
+  .btn-ghost {
+    @apply inline-flex items-center justify-center px-4 py-2 text-gray-600 font-medium rounded-lg
+           hover:bg-gray-100 active:bg-gray-200 transition-all duration-200
+           text-base min-h-[44px];
+  }
+
+  .card {
+    @apply bg-white rounded-2xl shadow-sm border border-gray-100 p-5 transition-all duration-200
+           hover:shadow-md active:shadow-sm;
+  }
+
+  .input-field {
+    @apply w-full px-4 py-3 bg-white border-2 border-gray-200 rounded-xl text-base
+           focus:border-primary-500 focus:ring-2 focus:ring-primary-100 outline-none
+           placeholder:text-gray-400 transition-all duration-200
+           min-h-[48px];
+  }
+
+  .section-title {
+    @apply text-2xl md:text-3xl font-bold text-gray-900 mb-2;
+  }
+
+  .section-subtitle {
+    @apply text-base md:text-lg text-gray-600 mb-6;
+  }
+
+  .nav-link {
+    @apply flex items-center gap-2 px-4 py-2.5 text-sm font-medium text-gray-600 rounded-lg
+           hover:bg-primary-50 hover:text-primary-700 transition-all duration-200;
+  }
+
+  .nav-link-active {
+    @apply bg-primary-50 text-primary-700 font-semibold;
+  }
+
+  .large-text {
+    @apply text-lg md:text-xl leading-relaxed;
+  }
+
+  .high-contrast {
+    @apply text-black bg-white;
+  }
+
+  .high-contrast a {
+    @apply text-blue-800 underline;
+  }
+
+  .high-contrast .card {
+    @apply border-gray-400 bg-white;
+  }
+}
+
+@layer utilities {
+  .touch-target {
+    @apply min-h-[48px] min-w-[48px];
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
