@@ -236,11 +236,9 @@ async function main() {
   console.log('');
   console.log('Admin Login:');
   console.log(`  Email: ${process.env.ADMIN_EMAIL || 'admin@healthconnect.org'}`);
-  console.log(`  Password: ${process.env.ADMIN_PASSWORD || 'Admin@123456'}`);
   console.log('');
   console.log('Demo User Login:');
   console.log('  Email: demo@healthconnect.org');
-  console.log('  Password: User@123456');
 }
 
 main()
