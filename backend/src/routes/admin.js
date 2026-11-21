@@ -6,6 +6,7 @@ import { createTemplate, updateTemplate, deleteTemplate } from '../controllers/v
 import { create as createContact, update as updateContact, remove as deleteContact } from '../controllers/emergencyContactsController.js';
 import { create as createWomenChild, update as updateWomenChild, remove as deleteWomenChild } from '../controllers/womenChildController.js';
 import { create as createLanguage, remove as deleteLanguage } from '../controllers/languagesController.js';
+import prisma from '../utils/prisma.js';
 
 const router = Router();
 
@@ -33,5 +34,28 @@ router.delete('/women-child/:id', deleteWomenChild);
 
 router.post('/languages', createLanguage);
 router.delete('/languages/:id', deleteLanguage);
+
+// Fetch registered community users - Admin only
+router.get('/community-users', async (req, res, next) => {
+  try {
+    const users = await prisma.user.findMany({
+      where: { role: 'user' },
+      select: {
+        name: true,
+        role: true
+      },
+      orderBy: {
+        createdAt: 'desc'
+      }
+    });
+
+    res.json({
+      success: true,
+      data: users
+    });
+  } catch (error) {
+    next(error);
+  }
+});
 
 export default router;
