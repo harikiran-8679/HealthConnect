@@ -209,36 +209,6 @@ export default function AdminDashboard() {
             </div>
           </div>
 
-          <div className="card mb-6">
-            <h4 className="font-bold text-gray-900 mb-4">{t('admin.topPages')}</h4>
-            <div className="space-y-2">
-              {analytics.topPages?.map((page, i) => (
-                <div key={i} className="flex items-center justify-between py-2 border-b border-gray-100 last:border-0">
-                  <span className="text-sm text-gray-700">{page.path}</span>
-                  <span className="text-sm font-semibold text-gray-900">{page.count}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <div className="card">
-            <h4 className="font-bold text-gray-900 mb-4">{t('admin.viewsByDay')}</h4>
-            <div className="space-y-1">
-              {analytics.viewsByDay?.slice(-14).map((day, i) => (
-                <div key={i} className="flex items-center gap-3">
-                  <span className="text-xs text-gray-500 w-24 shrink-0">{day.date}</span>
-                  <div className="flex-1 bg-gray-100 rounded-full h-4 overflow-hidden">
-                    <div
-                      className="bg-primary-500 h-full rounded-full transition-all"
-                      style={{ width: `${Math.min(100, (day.count / Math.max(...analytics.viewsByDay.map(d => d.count))) * 100)}%` }}
-                    />
-                  </div>
-                  <span className="text-xs font-semibold text-gray-700 w-8 text-right">{day.count}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-
           {/* Community Users - admin-only list of registered community accounts */}
           <div className="card mt-6">
             <h4 className="font-bold text-gray-900 mb-4">Community Users</h4>
