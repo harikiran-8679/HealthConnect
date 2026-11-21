@@ -29,6 +29,8 @@ export default function AdminDashboard() {
   const [editingItem, setEditingItem] = useState(null);
   const [showForm, setShowForm] = useState(false);
   const [analytics, setAnalytics] = useState(null);
+  const [communityUsers, setCommunityUsers] = useState([]);
+  const [usersError, setUsersError] = useState('');
 
   if (!user || user.role !== 'admin') {
     return <Navigate to="/login" />;
@@ -107,17 +109,29 @@ export default function AdminDashboard() {
     }
   };
 
+  
   const fetchAnalytics = async () => {
     setLoading(true);
+    setUsersError('');
+  
     try {
       const res = await adminApi.getAnalytics();
       setAnalytics(res.data);
     } catch (err) {
       toast.error(err.message);
+    }
+  
+    try {
+      const res = await adminApi.getCommunityUsers();
+      setCommunityUsers(res.data || []);
+    } catch (err) {
+      setUsersError(err.message);
+      setCommunityUsers([]);
     } finally {
       setLoading(false);
     }
   };
+
 
   const handleDelete = async (id, type) => {
     if (!window.confirm(t('admin.confirmDelete'))) return;
@@ -227,6 +241,38 @@ export default function AdminDashboard() {
                 </div>
               ))}
             </div>
+          </div>
+
+          {/* Community Users - admin-only list of registered community accounts */}
+          <div className="card mt-6">
+            <h4 className="font-bold text-gray-900 mb-4">Community Users</h4>
+
+            {usersError ? (
+              <p className="text-sm text-red-600">
+                Unable to load community users: {usersError}
+              </p>
+            ) : communityUsers.length === 0 ? (
+              <p className="text-sm text-gray-500 py-4">No community users found.</p>
+            ) : (
+              <div className="overflow-x-auto">
+                <table className="w-full text-sm">
+                  <thead>
+                    <tr className="bg-gray-50">
+                      <th className="text-left px-4 py-3 font-semibold text-gray-700">Name</th>
+                      <th className="text-left px-4 py-3 font-semibold text-gray-700">Role</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-gray-100">
+                    {communityUsers.map((communityUser, index) => (
+                      <tr key={index} className="hover:bg-gray-50">
+                        <td className="px-4 py-3 text-gray-900">{communityUser.name}</td>
+                        <td className="px-4 py-3 text-gray-600">{communityUser.role}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            )}
           </div>
         </div>
       );
