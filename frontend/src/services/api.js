@@ -108,6 +108,9 @@ export const admin = {
   createLanguage: (body) => request('/admin/languages', { method: 'POST', body }),
   deleteLanguage: (id) => request(`/admin/languages/${id}`, { method: 'DELETE' }),
   getAnalytics: () => request('/analytics/dashboard'),
+  getCommunityUsers: () => request('/admin/community-users'),
+
+
 };
 
 export const search = {
