@@ -194,11 +194,7 @@ export default function AdminDashboard() {
     if (activeTab === TABS.ANALYTICS && analytics) {
       return (
         <div>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-            <div className="card text-center">
-              <p className="text-3xl font-bold text-gray-900">{analytics.totalViews}</p>
-              <p className="text-sm text-gray-500">{t('admin.totalViews')}</p>
-            </div>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
             <div className="card text-center">
               <p className="text-3xl font-bold text-gray-900">{analytics.totalUsers}</p>
               <p className="text-sm text-gray-500">{t('admin.totalUsers')}</p>
